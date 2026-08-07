@@ -5,13 +5,14 @@ namespace LibraryManagement.Service;
 public class BookService
 {
     private readonly List<Book> _books = new();
-    public void AddBook(string title, string author)
+    public void AddBook(string title, string author, bool isAvailable)
     {
       _books.Add(new Book
       {
           BookId = _books.Count + 1,
           Title = title,
-          Author = author
+          Author = author, 
+          IsAvailable = isAvailable
       });
     }
 
@@ -45,5 +46,10 @@ public class BookService
     public List<Book> SearchByAuthor(string author)
     {
         return _books.Where(x => x.Author == author).ToList();
+    }
+    
+    public List<Book> SearchByIsAvailable()
+    {
+        return _books.Where(x => x.IsAvailable).ToList();
     }
 }
